@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') %>
+    <section class="container p-4">
+        <article class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Add new Operation</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="/mywallet" method="post" novalidate class="validated-form">
+                            <div class="mb-3">
+                              <label for="title" class="form-label">Title</label>
+                              <input type="text" class="form-control" id="title" name="operation[title]" placeholder="Operation title" required>
+                              <div class="valid-feedback">Looks good!</div>
+                              <div class="invalid-feedback">Please enter a Title.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="value" class="form-label">Value</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                    <input type="text" class="form-control" id="value" placeholder="9.99" name="operation[value]" aria-describedby="basic-addon1" required >
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Value.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3"">
+                                <label for="category" class="mb-2">Select Category</label>
+                                <select class="form-select" name="operation[category]" id="category" required>
+                                    <option selected disabled value="" >Choose one...</option>
+                                    <option value="income">Income</option>
+                                    <option value="outcome">Outcome</option>
+                                  </select>
+                                  <div class="valid-feedback">Looks good!</div>
+                                  <div class="invalid-feedback">Please select a Category.</div>
+                            </div>
+                             <div class="form-floating my-4">
+                                <textarea class="form-control" placeholder="Enter description" id="description" style="height: 100px"></textarea>
+                                <label for="description">Description</label>
+                              </div>
+                             <button type="submit" class="btn btn-primary">Add</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>

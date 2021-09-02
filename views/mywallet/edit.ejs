@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate') %>
+    <section class="container p-4">
+        <article class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Edit Operation</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="/mywallet/<%= operation.id %>?_method=PUT" method="POST"
+                            enctype="application/x-www-form-urlencoded" novalidate class="validated-form">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" name="operation[title]"
+                                    placeholder="Operation title" required value="<%= operation.title %>">
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Please enter a Title.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="value" class="form-label">Value</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                    <input type="text" class="form-control" id="value" placeholder="9.99"
+                                        name="operation[value]" aria-describedby="basic-addon1" required
+                                        value="<%= operation.value %>">
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Value.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3"">
+                                <label for=" category" class="mb-2">Select Category</label>
+                                <select class="form-select" name="operation[category]" id="category" required>
+                                    <% for(let category of categories){%>
+                                        <option value="<%= category %>" <%= operation.category === category.toLowerCase() ? 'selected' : '' %>><%= category %></option>
+                                    <%}  %>         </select>
+                                </select>
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Please select a Category.</div>
+                            </div>
+                            <div class="form-floating my-4">
+                                <textarea class="form-control" placeholder="Enter description" id="description"
+                                    style="height: 100px" name="operation[body]"><%= operation.body %></textarea>
+                                <label for="description">Description</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>

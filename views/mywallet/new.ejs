@@ -7,7 +7,7 @@
                         <h1>Add new Operation</h1>
                     </div>
                     <div class="card-body">
-                        <form action="/mywallet" method="post" novalidate class="validated-form">
+                        <form action="/mywallet" method="post" enctype="application/x-www-form-urlencoded" novalidate class="validated-form">
                             <div class="mb-3">
                               <label for="title" class="form-label">Title</label>
                               <input type="text" class="form-control" id="title" name="operation[title]" placeholder="Operation title" required>
@@ -35,7 +35,7 @@
                                   <div class="invalid-feedback">Please select a Category.</div>
                             </div>
                              <div class="form-floating my-4">
-                                <textarea class="form-control" placeholder="Enter description" id="description" style="height: 100px"></textarea>
+                                <textarea class="form-control" placeholder="Enter description" id="description" style="height: 100px" name="operation[body]"></textarea>
                                 <label for="description">Description</label>
                               </div>
                              <button type="submit" class="btn btn-primary">Add</button>

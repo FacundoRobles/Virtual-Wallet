@@ -1,0 +1,17 @@
+#logoImg{
+    opacity: 0.5;
+    width: 65%;
+    display: flex;
+   
+}
+
+#homeContainerDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: space-between;
+}
+#homeSection{
+    background-color: rgb(46, 42, 42);
+    height: 100vh;
+}

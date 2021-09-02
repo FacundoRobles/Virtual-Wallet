@@ -1,9 +1,30 @@
 <% layout('layouts/boilerplate') %>
-<form action="POST">
+
     <div class="container">
             <h1>My Wallet</h1>
-
+            <section>
+                <div class="col-md-6">
+                    <% for( let operation of operations ) { %>
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <h3><%= operation.title %></h3>
+                                <h3><%= operation.value %> </h3>
+                            </div>
+                            <card class="card-body">
+                                <p><%= operation.body %></p> 
+                            </card>
+                            <form action="/mywallet/<%= operation.id %>"
+                                method="get">
+                                <button class="btn btn-sm btn-primary">EDIT</button>
+                            </form> 
+                            <form action="/mywallet/<%= operation.id %>?_method=DELETE"
+                                method="post">
+                                <button class="btn btn-sm btn-danger">DELETE</button>
+                            </form> 
+                        </div>
+                    <% } %>
+                </div>
+            </section>
             <input type="text">
             <button>Add</button>
         </div>
-    </form>

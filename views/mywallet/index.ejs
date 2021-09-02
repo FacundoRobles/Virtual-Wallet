@@ -1,30 +1,69 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="container">
-            <h1>My Wallet</h1>
-            <section>
-                <div class="col-md-6">
-                    <% for( let operation of operations ) { %>
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h3><%= operation.title %></h3>
-                                <h3><%= operation.value %> </h3>
+    <div class="container" id="indexContainer">
+            <div class="row">
+                <section class="mt-4 col-md-6">
+                    <h2>Last movements</h2>
+                    <div>
+                        <button class="btn btn-success mb-3 "><a class="text-decoration-none text-white"href="/mywallet/new">New Operation</a></button>
+
+                        <% for( let operation of operations ) { %>
+                            <% let count = 0 %>
+                            <% count++ %>
+                            <% if (count > 10) break;%>
+                            <div class="card d-flex bg-dark text-light mb-3">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h3 style="text-transform: capitalize;"><%= operation.title%> </h3>
+                                    <h3 >$<%= operation.value %> </h3>
+                                </div>
+                                <card class="card-body p-0 px-3 pt-2 ">
+                                    <p class="mb-0"><%= operation.body.charAt(0).toUpperCase()%><%= operation.body.slice(1) %> </p> 
+                                </card>
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <div class="d-flex">
+                                        <p class="text-muted mb-0 px-2"><%= momentFunc(operation.created_at) %></p>
+                                        <p class="text-muted mb-0"> <%= momentFromNow(operation.created_at) %>  </p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <form action="/mywallet/<%= operation.id %>"
+                                            method="get">
+                                            <button class="btn btn-sm btn-primary px-3 m-1">EDIT</button>
+                                        </form> 
+                                        <form action="/mywallet/<%= operation.id %>?_method=DELETE"
+                                            method="post">
+                                            <button class="btn btn-sm btn-danger m-1">DELETE</button>
+                                        </form> 
+                                    </div>
+                                </div>
                             </div>
-                            <card class="card-body">
-                                <p><%= operation.body %></p> 
-                            </card>
-                            <form action="/mywallet/<%= operation.id %>"
-                                method="get">
-                                <button class="btn btn-sm btn-primary">EDIT</button>
-                            </form> 
-                            <form action="/mywallet/<%= operation.id %>?_method=DELETE"
-                                method="post">
-                                <button class="btn btn-sm btn-danger">DELETE</button>
-                            </form> 
+                        <% } %>
+                    </div>
+                </section>
+                <section class="col-md-6 mt-4">
+                    <div class="d-flex justify-content-end mb-5">
+                        <h2>Total Balance: 
+                            <% if (balanceValue >= 0) { %>
+                                <span class="text-success"><%=balanceValue%></span>
+                            <% } else{ %>
+                                <span class="text-danger"><%=balanceValue%></span> 
+                            <%} %>
+                        </h2>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class=" card col-md-10 text-white">
+                            <div class="card-body ">
+
+                            <% for( let operation of operations ) { %>
+                                    <% if (operation.type === 'income') { %>
+                                        <p class="text-success">+<%= operation.value %> <%= operation.title %> <%= momentFunc(operation.created_at) %></p>
+                                    <% } %>
+                                    <% if (operation.type === 'outcome') { %>
+                                        <p class="text-danger">-<%= operation.value %> <%= operation.title %> <%= momentFunc(operation.created_at) %></p>
+                                    <% } %>
+                            <% } %>
+                            </div>
                         </div>
-                    <% } %>
-                </div>
-            </section>
-            <input type="text">
-            <button>Add</button>
-        </div>
+                    </div>
+                </section>
+            </div>
+            </div>

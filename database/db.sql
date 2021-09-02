@@ -17,8 +17,9 @@ CREATE TABLE operations(
     id INT(11) AUTO_INCREMENT NOT NULL,
     title VARCHAR (255) NOT NULL,
     body VARCHAR(255),
-    value DECIMAL(9,2) NOT NULL,
+    type VARCHAR(20) NOT NULL,
     category VARCHAR(40) NOT NULL,
+    value DECIMAL(9,2) NOT NULL,
     user_id INT(11),
     created_at timestamp NOT NULL DEFAULT current_timestamp,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users

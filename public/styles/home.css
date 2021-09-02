@@ -1,17 +1,25 @@
+main{
+    background-image: url("https://wallpapercave.com/wp/wp2486418.jpg");
+}
 #logoImg{
-    opacity: 0.5;
-    width: 65%;
+    
+    opacity: 0.9;
+    width: 100%;
     display: flex;
    
 }
 
 #homeContainerDiv{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-items: space-between;
+    
+    color: white;
 }
 #homeSection{
-    background-color: rgb(46, 42, 42);
+    display: flex;
+    align-items: center;
+    
     height: 100vh;
+    
+}
+#textDiv{
+    align-self: center;
 }

@@ -1,26 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const catchAsync = require('../utils/catchAsync');
 
-const categories = ['Income', 'Outcome'];
+const balance = require('../utils/balance');
+const reverse = require('../utils/operationsReverse');
+const catchAsync = require('../utils/catchAsync');
+const {momentFunc, momentFromNow} = require('../utils/moment');
+
+const categories = ['Expenses','Food','Groceries','Salary','Other'];
 //INDEX CREATE AND READ OPERATIONS
 router.route('/')
     .get(catchAsync(async (req, res) => {
-        const operations = await pool.query('SELECT * FROM operations');
-        res.render('mywallet/index', { operations });
+        const rawData = await pool.query('SELECT * FROM operations');
+        const operations = reverse(rawData);
+        const balanceValue = balance(operations);
+        res.render('mywallet/index', { operations , balanceValue, momentFunc, momentFromNow });
     }))
     .post(catchAsync(async (req, res) => {
         const { operation } = req.body;
         console.log(operation);
         await pool.query('INSERT INTO operations set ?', [operation]);
-        res.redirect('/mywallet/index');
+        res.redirect('/mywallet');
     }));
 
 //NEW FORM
 
 router.get('/new', (req, res) => {
-    res.render('mywallet/new');
+    res.render('mywallet/new', {categories});
 });
 
 //UPDATE AND DELETE OPERATION
@@ -36,9 +42,9 @@ router.route('/:id')
     }))
     .put(catchAsync(async (req, res) => {
         const { id } = req.params;
-        const { title, value, category, body } = req.body.operation;
+        const { title, value, type, category, body } = req.body.operation;
         await pool.query(
-            `UPDATE operations SET title='${title}', value=${value}, category='${category}', body='${body}' WHERE id =${id}`
+            `UPDATE operations SET title='${title}', value=${value}, type='${type}', category='${category}', body='${body}' WHERE id =${id}`
         );
         res.redirect('/mywallet');
     }))

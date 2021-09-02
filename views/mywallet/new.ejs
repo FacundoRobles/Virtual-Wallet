@@ -2,7 +2,7 @@
     <section class="container p-4">
         <article class="row">
             <div class="col-6 offset-3">
-                <div class="card">
+                <div class="card bg-dark text-light">
                     <div class="card-header text-center">
                         <h1>Add new Operation</h1>
                     </div>
@@ -25,20 +25,35 @@
                                 </div>
                             </div>
                             <div class="mb-3"">
-                                <label for="category" class="mb-2">Select Category</label>
-                                <select class="form-select" name="operation[category]" id="category" required>
+                                <label for="type" class="mb-2">Select Operation type</label>
+                                <select class="form-select" name="operation[type]" id="type" required>
                                     <option selected disabled value="" >Choose one...</option>
                                     <option value="income">Income</option>
                                     <option value="outcome">Outcome</option>
                                   </select>
                                   <div class="valid-feedback">Looks good!</div>
+                                  <div class="invalid-feedback">Please select the Type.</div>
+                            </div>
+                            <div class="mb-3"">
+                                <label for="category" class="mb-2">Select Category</label>
+                                <select class="form-select" name="operation[category]" id="category" required>
+                                    <option selected disabled value="" >Choose one...</option>
+                                    <% for(let category of categories){ %>
+                                        <option value="<%= category %>"><%= category %></option>
+                                    <% } %>
+                                  </select>
+                                  <div class="valid-feedback">Looks good!</div>
                                   <div class="invalid-feedback">Please select a Category.</div>
                             </div>
+
                              <div class="form-floating my-4">
                                 <textarea class="form-control" placeholder="Enter description" id="description" style="height: 100px" name="operation[body]"></textarea>
-                                <label for="description">Description</label>
+                                <label for="description" class="text-dark">Description</label>
                               </div>
-                             <button type="submit" class="btn btn-primary">Add</button>
+                              <div class="justify-content-between d-flex">
+                                <a class="text-decoration-none text-white btn btn-secondary"href="/mywallet">Back</a>
+                                <button type="submit" class="btn btn-primary ">Add</button>
+                            </div>
                           </form>
                     </div>
                 </div>

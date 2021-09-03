@@ -54,11 +54,13 @@
                                             <h3 class="text-danger">-$<%= operation.value %></h3>
                                     <% } %> 
                                 </div>
-                                <card class="card-body p-0 px-3 pt-2 ">
-                                    <p class="mb-0">
-                                        <%= operation.body.charAt(0).toUpperCase()%>
-                                            <%= operation.body.slice(1) %>
-                                    </p>
+                                <card class="card-body p-0 px-3 pt-2 "> 
+                                    <% if (operation.body) { %>
+                                        <p class="mb-0">
+                                            Description: <b><%= operation.body.charAt(0).toUpperCase()%><%= operation.body.slice(1) %></b>
+                                        </p>
+                                    <% } %>
+                                    <p class="text-capitalize">Category: <b><%= operation.category %></b></p>
                                 </card>
                                 <div class="d-flex justify-content-between align-items-end pt-0">
                                     <div class="d-flex">

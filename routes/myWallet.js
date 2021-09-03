@@ -8,6 +8,7 @@ const catchAsync = require('../utils/catchAsync');
 const { momentFunc, momentFromNow } = require('../utils/moment');
 
 const categories = ['Expenses', 'Food', 'Groceries', 'Salary', 'Other'];
+
 //INDEX CREATE AND READ OPERATIONS
 router
     .route('/')
@@ -39,28 +40,16 @@ router
             const { operation } = req.body;
             console.log(operation);
             await pool.query('INSERT INTO operations set ?', [operation]);
+            req.flash('success', 'Successfully create a new Operation.');
             res.redirect('/mywallet');
         })
     );
 
 //NEW FORM
-
 router.get('/new', (req, res) => {
     res.render('mywallet/new', { categories });
 });
 
-//FILTER
-router.get('/filter',catchAsync(async (req,res)=>{
-    const { filter } = req.query
-    const rawData = await pool.query(`SELECT * FROM operations WHERE category ='${filter}'`);
-    const operations = reverse(rawData);
-    const balanceValue = balance(operations);
-    res.render('mywallet/index', {operations,
-    balanceValue,
-    momentFunc,
-    momentFromNow,
-    })
-}));
 
 //UPDATE AND DELETE OPERATION
 router
@@ -72,7 +61,6 @@ router
                 `SELECT * FROM operations WHERE id =${id}`
             );
             const operation = rawData[0];
-            console.log(operation);
             res.render('mywallet/edit', { operation, categories });
         })
     )
@@ -83,6 +71,7 @@ router
             await pool.query(
                 `UPDATE operations SET title='${title}', value=${value}, type='${type}', category='${category}', body='${body}' WHERE id =${id}`
             );
+            req.flash('success', 'Successfully updated Operation.');
             res.redirect('/mywallet');
         })
     )
@@ -90,6 +79,7 @@ router
         catchAsync(async (req, res) => {
             const { id } = req.params;
             await pool.query(`DELETE FROM operations WHERE id =${id}`);
+            req.flash('success', 'Successfully deleted Operation');
             res.redirect('/mywallet');
         })
     );

@@ -19,10 +19,8 @@
                     <div class="col-md-6" id="textDiv">
                         <h1>Welcome to your Virtual Wallet</h1>
                         <h2>Start operating now</h2>
-                        <a href="/register" class="text-decoration-none text-white btn btn-success">Register</a>
-                        <a href="login" class="text-decoration-none text-white btn btn-secondary">Login</a>
-                        <a href="/mywallet" class="text-decoration-none text-white btn btn-dark">My Wallet</a>
-                        
+                        <a href="/" id="register" class="text-decoration-none text-white btn btn-success">Register</a>
+                        <a href="/" id="login" class="text-decoration-none text-white btn btn-secondary">Login</a>
                     </div>
                     <div class="col-md-6">
         
@@ -33,6 +31,93 @@
                 </div>
             </div>
         </section>
+        
+        <section class="container p-4 hidden form" id="loginForm">
+            <article class="row">
+                <div class="col-6 offset-3">
+                    <div class="card bg-dark text-light px-3">
+                        <div class="card-header text-center">
+                            <h2>Login</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="card-body">
+                            <form action="/login" method="POST" enctype="application/x-www-form-urlencoded" novalidate
+                                class="validated-form">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        placeholder="Username" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Username.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Password.</div>
+                                </div>
+                        </div>
+                        <div class="p-3 d-grid">
+                            <button type="submit" class="btn btn-success ">Login</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </article>
+        </section>
+        <section class="container p-4 hidden form" id="registerForm">
+            <article class="row">
+                <div class="col-6 offset-3">
+                    <div class="card bg-dark text-light px-3">
+                        <div class="card-header text-center">
+                            <h2>Register</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="card-body">
+                            <form action="/register" method="POST" enctype="application/x-www-form-urlencoded" novalidate
+                                class="validated-form">
+                                <div class="mb-3">
+                                    <label for="firstname" class="form-label">Firstname</label>
+                                    <input type="text" class="form-control" id="firstname" name="firstname"
+                                        placeholder="Firstname" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your Firstname.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Lastname" class="form-label">Lastname</label>
+                                    <input type="text" class="form-control" id="Lastname" name="lastname"
+                                        placeholder="Lastname" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your Lastname.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        placeholder="Username" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Username.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Password.</div>
+                                </div>
+                        </div>
+                        <div class="p-3 d-grid">
+                            <button type="submit" class="btn btn-success ">Login</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </article>
+        </section>
+        <div class="overlay hidden"></div>
     </main>
+    <script src="/javascripts/homeEvents.js"></script>
 </body>
 </html>

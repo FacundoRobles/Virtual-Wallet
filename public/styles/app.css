@@ -1,8 +1,69 @@
+/* APP CSS */
 
 body{
-    height: 100vh;
-    font-family: 'Roboto', sans-serif;
-    background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 100%);
-background-repeat: no-repeat;
+    height: 100%;
+    min-height: 100vh;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background-repeat: no-repeat;
+}
+
+#indexContainer {
+    margin-top: 2%;
+    margin-bottom: 7%;
+}
+ 
+.navbar, .nav-link{
+    font-weight: 600;
+    color: #a2a3a3;
+    font-size: 16pxem;
+    text-decoration: none;
+    /* background-color: #24252a; */
+    transition: all 0.5s ease
+} 
+.navbar-brand{
+    color: rgba(49, 100, 255, 0.856);
+    transition: all 0.5s ease;
+    font-weight: 600;   
+}
+
+.navbar-brand:hover,.nav-link:hover{
+    padding-bottom: 5px;
+    color: #41413e;
+    text-shadow: 2px 2px 20px #b9b49c; 
+}
+
+#opCard h3{
+    color: #e39bff;
+}
+#opCard{
+    color: rgba(236, 234, 234, 0.897);
+    border: solid 0.5px rgba(255, 251, 251, 0.61);
+    border-radius: 5px;
+}
+
+#balCard{
+    background-color: rgba(0, 2, 105, 0.705);
+    border: solid 0.5px rgba(255, 251, 251, 0.61);
+    border-radius: 5px;
+}
+
+h2{
+    font-weight: 600;
+    color: rgba(49, 100, 255, 0.856);
+    margin-bottom: 10px;
+}
+
+footer{
+    background-color: rgb(7, 7, 7);
+}
+
+footer a{
+    color: rgb(82, 82, 82);
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: #e39bff;
+    
 }

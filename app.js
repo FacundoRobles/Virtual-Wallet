@@ -13,7 +13,7 @@ const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
 const { database } = require('./keys');
 const passport = require('passport');
-// const helmet = require('helmet')
+const helmet = require('helmet')
 
 
 const myWalletRoutes = require('./routes/myWallet');
@@ -98,47 +98,47 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-//helmet
+helmet
 
-// app.use(helmet());
-// const scriptSrcUrls = [
-//     "https://stackpath.bootstrapcdn.com/",
-//     "https://kit.fontawesome.com/",
-//     "https://cdnjs.cloudflare.com/",
-//     "https://cdn.jsdelivr.net",
-// ];
-// const styleSrcUrls = [
-//     "https://kit-free.fontawesome.com/",
-//     "https://stackpath.bootstrapcdn.com/",
-//     "https://fonts.googleapis.com/",
-//     "https://use.fontawesome.com/",
-// 	"https://cdn.jsdelivr.net",
-// ];
-// const connectSrcUrls = [
-//     "https://a.tiles.mapbox.com/",
-//     "https://b.tiles.mapbox.com/",
-//     "https://events.mapbox.com/",
-// ];
-// const fontSrcUrls = [];
+app.use(helmet());
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+	"https://cdn.jsdelivr.net",
+];
+const connectSrcUrls = [
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+];
+const fontSrcUrls = [];
 
-// app.use(
-//     helmet.contentSecurityPolicy({
-//         directives: {
-//             defaultSrc: [],
-//             connectSrc: ["'self'", ...connectSrcUrls],
-//             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-//             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-//             workerSrc: ["'self'", "blob:"],
-//             objectSrc: [],
-//             imgSrc: [
-//                 "'self'",
-//                 "blob:",
-//                 "data:",
-//             ],
-//             fontSrc: ["'self'", ...fontSrcUrls],
-//         },
-//     })
-// );
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
 
 
 // error route handlers

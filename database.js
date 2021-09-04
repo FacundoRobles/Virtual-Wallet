@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 const { promisify } = require('util');
-// const { database } = require('./keys');
 
 const database = {
     host: process.env.HOST,

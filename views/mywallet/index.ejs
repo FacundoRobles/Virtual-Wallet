@@ -1,8 +1,28 @@
 <% layout('layouts/boilerplate') %>
+<% if (operations.length === 0) { %>
+    <div class="container mt-5">
 
+        <div id="opCard" class="card d-flex bg-dark  col-4 offset-4 p-2 ">
+            <div class="card-header d-flex justify-content-between pb-0 mb-0 ">
+                <h3 class="fs-4 text-capitalize">
+                   No operations registered here
+                </h3>
+            </div>
+            <div class="card-body p-0 px-3 pt-2 text-center "> 
+                    <p class="mb-0">
+                       Create a new operation to see your Balance
+                    </p>
+                    <div class="d-grid mt-1">
+
+                        <button class="btn btn-secondary my-2 "><a class="text-decoration-none text-white"
+                            href="/mywallet/new">New Operation</a></button>
+                    </div>
+            </div>
+    </div>
+<% } else { %>
     <div class="container" id="indexContainer">
         <div class="row">
-            <section class="col-md-6 order-2 order-md-1">
+            <section class="col-12 col-md-6 order-2 order-md-1">
                 <h1 style="display: none;">My virtual wallet</h1>
                 <h2>Last movements</h2>
                 <div>
@@ -84,8 +104,8 @@
                             <% } %>
                 </div>
             </section>
-            <section class="col-md-6 order-1 order-md-2">
-                <div class="d-flex justify-content-end mb-5">
+            <section class="col-12 col-md-6 order-1 order-md-2">
+                <div class="d-flex justify-content-md-end mt-3 mt-md-0 mb-md-5">
                     <h2>Total Balance:
                         <% if (balanceValue>= 0) { %>
                             <span class="text-success">
@@ -127,3 +147,4 @@
             </section>
         </div>
     </div>
+    <% } %> 

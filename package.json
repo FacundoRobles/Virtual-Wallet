@@ -11,17 +11,21 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
+    "dotenv": "^10.0.0",
     "ejs-mate": "^3.0.0",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.6",
     "express-session": "^1.17.2",
     "express-validator": "^6.12.1",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.2",
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "sanitize-html": "^2.4.0",
     "timeago.js": "^4.0.2"
   }
 }

@@ -16,13 +16,17 @@
         <section id="homeSection">
             <div class="container" id="homeContainerDiv">
                 <div class="row">
-                    <div class="col-md-6" id="textDiv">
+                    <div class="col-12 col-md-6 text-center text-md-start"  id="textDiv">
                         <h1>Welcome to your Virtual Wallet</h1>
-                        <h2>Start operating now</h2>
-                        <a href="/" id="register" class="text-decoration-none text-white btn btn-success">Register</a>
-                        <a href="/" id="login" class="text-decoration-none text-white btn btn-secondary">Login</a>
+                        <h2 class="mb-4 mb-md-2">Start operating now</h2>
+                        <% if (!currentUser) { %>
+                            <a href="/" id="register" class="text-decoration-none text-white btn btn-success mx-2 mx-md-0">Register</a>
+                            <a href="/" id="login" class="text-decoration-none text-white btn btn-secondary mx-2 mx-md-0">Login</a>
+                        <% } else {%>
+                            <a href="/mywallet" id="myWallet" class="text-decoration-none text-white btn btn-info">My Wallet</a>
+                        <% } %>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 pt-5 pt-md-0">
         
                         <div id="logoImg">
                             <img src="/imgs/virtualWalletLogo.png" alt="virtual wallet logo" class="img-fluid">
@@ -32,9 +36,9 @@
             </div>
         </section>
         
-        <section class="container p-4 hidden form" id="loginForm">
+        <section class="container p-md-4 hidden form" id="loginForm">
             <article class="row">
-                <div class="col-6 offset-3">
+                <div class="col-12 col-md-9 col-lg-4 offset-0 offset-md-2 offset-lg-4 mt-3 mb-5 mb-md-0">
                     <div class="card bg-dark text-light px-3">
                         <div class="card-header text-center">
                             <h2>Login</h2>
@@ -59,7 +63,7 @@
                                 </div>
                         </div>
                         <div class="p-3 d-grid">
-                            <button type="submit" class="btn btn-success ">Login</button>
+                            <button type="submit" class="btn btn-secondary ">Login</button>
                         </div>
                         </form>
                     </div>
@@ -69,14 +73,14 @@
         </section>
         <section class="container p-4 hidden form" id="registerForm">
             <article class="row">
-                <div class="col-6 offset-3">
+                <div class="col-12 col-md-9 col-lg-4 offset-0 offset-md-2 offset-lg-4 mt-3 mb-5 mb-md-0">
                     <div class="card bg-dark text-light px-3">
                         <div class="card-header text-center">
-                            <h2>Register</h2>
+                            <h2>Sign Up</h2>
                             <button class="close-modal">&times;</button>
                         </div>
                         <div class="card-body">
-                            <form action="/register" method="POST" enctype="application/x-www-form-urlencoded" novalidate
+                            <form action="/signup" method="POST" enctype="application/x-www-form-urlencoded" novalidate
                                 class="validated-form">
                                 <div class="mb-3">
                                     <label for="firstname" class="form-label">Firstname</label>
@@ -108,7 +112,7 @@
                                 </div>
                         </div>
                         <div class="p-3 d-grid">
-                            <button type="submit" class="btn btn-success ">Login</button>
+                            <button type="submit" class="btn btn-success ">Sign Up</button>
                         </div>
                         </form>
                     </div>
@@ -118,6 +122,10 @@
         </section>
         <div class="overlay hidden"></div>
     </main>
+    <script src="/javascripts/validateForms.js"></script>
     <script src="/javascripts/homeEvents.js"></script>
+    <script>
+        if(err) alert(err);
+    </script>
 </body>
 </html>

@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+};
+
 const express = require('express');
 const path = require('path');
 const ejsMate = require('ejs-mate');
@@ -8,9 +12,14 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
 const { database } = require('./keys');
+const passport = require('passport');
+// const helmet = require('helmet')
+
 
 const myWalletRoutes = require('./routes/myWallet');
 const userRoutes = require('./routes/users');
+const ExpressError = require('./utils/ExpressError');
+const passportConfig = require('./utils/passport');
 
 //EXPRESS INIT
 const app = express();
@@ -23,8 +32,8 @@ const secret = process.env.SECRET || 'thiswillbeaseacret';
 //session storage
 const store = mysqlStore(database);
 
-store.on('error', function(e){
-    console.log('SESSION STORE ERROR', e)
+store.on('error', function (e) {
+    console.log('SESSION STORE ERROR', e);
 });
 //session config
 const sessionConfig = {
@@ -43,18 +52,29 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
+//PASSPORT
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 //FLASH
 app.use(flash());
+
 app.use((req, res, next) => {
-    // if (!['/login', '/register', '/'].includes(req.originalUrl)){
-    // 	req.session.returnTo = req.originalUrl;
-    // }
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 });
 
+//NO RETURN TO MIDDLEWARE
+app.use(function (req, res, next) {
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+
+    next();
+});
 //METHOD OVERRIDE
 app.use(methodOverride('_method'));
 
@@ -65,10 +85,8 @@ app.set('view engine', 'ejs');
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
 
-//MIDDLEWARES
+//MORGAN
 app.use(morgan('dev'));
-
-//GLOBAL VARIABLES
 
 //ROUTES
 //MY WALLET ROUTE
@@ -78,6 +96,59 @@ app.use('/', userRoutes);
 //HOME ROUTE
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+//helmet
+
+// app.use(helmet());
+// const scriptSrcUrls = [
+//     "https://stackpath.bootstrapcdn.com/",
+//     "https://kit.fontawesome.com/",
+//     "https://cdnjs.cloudflare.com/",
+//     "https://cdn.jsdelivr.net",
+// ];
+// const styleSrcUrls = [
+//     "https://kit-free.fontawesome.com/",
+//     "https://stackpath.bootstrapcdn.com/",
+//     "https://fonts.googleapis.com/",
+//     "https://use.fontawesome.com/",
+// 	"https://cdn.jsdelivr.net",
+// ];
+// const connectSrcUrls = [
+//     "https://a.tiles.mapbox.com/",
+//     "https://b.tiles.mapbox.com/",
+//     "https://events.mapbox.com/",
+// ];
+// const fontSrcUrls = [];
+
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             defaultSrc: [],
+//             connectSrc: ["'self'", ...connectSrcUrls],
+//             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+//             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+//             workerSrc: ["'self'", "blob:"],
+//             objectSrc: [],
+//             imgSrc: [
+//                 "'self'",
+//                 "blob:",
+//                 "data:",
+//             ],
+//             fontSrc: ["'self'", ...fontSrcUrls],
+//         },
+//     })
+// );
+
+
+// error route handlers
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404));
+});
+
+app.use((err, req, res, next) => {
+    if (!err.message) err.message = 'Something Went Wrong.';
+    res.status((err.statusCode = 500)).render('error', { err });
 });
 
 //STARTING SERVER

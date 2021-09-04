@@ -5,13 +5,12 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const path = require('path');
 const ejsMate = require('ejs-mate');
-const mysql = require('mysql');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
-const { database } = require('./keys');
+
 const passport = require('passport');
 const helmet = require('helmet')
 

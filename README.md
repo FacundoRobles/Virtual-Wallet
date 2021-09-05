@@ -5,9 +5,9 @@ https://virtual-wallet1.herokuapp.com/
 Fully made with JavaScript on Front and Backend, MySQL used as DB.
 
 **How to use the app**
-- Go to fork repository and Copy Fork link
-- *git clone **forklink*** on terminal
-- *cd **repositorydirectory*** on terminal
+- Go to **Code**>**Clone** and Copy link
+- *git clone **clonelink*** on terminal
+- *cd **cloneDirectory*** on terminal
 - *npm install* on terminal
 - *node app.js* to run script
 

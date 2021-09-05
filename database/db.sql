@@ -1,3 +1,4 @@
+-- MY SQL COMMANDS FOR DATABASE INI
 CREATE DATABASE virtual_wallet
 use virtual_wallet;
 
@@ -14,7 +15,7 @@ DESCRIBE users;
 
 -- OPERATIONS TABLE
 CREATE TABLE operations(
-    id INT(11) AUTO_INCREMENT NOT NULL,
+    id INT(11) NOT NULL,
     title VARCHAR (255) NOT NULL,
     body VARCHAR(255),
     type VARCHAR(20) NOT NULL,
@@ -22,7 +23,7 @@ CREATE TABLE operations(
     value DECIMAL(9,2) NOT NULL,
     user_id INT(11),
     created_at timestamp NOT NULL DEFAULT current_timestamp,
-    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users
-
-    PRIMARY KEY(id)
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
+ALTER TABLE operations ADD PRIMARY KEY (id);
+ALTER TABLE operations MODIFY id INT(11) NOT NULL AUTO_INCREMENT;

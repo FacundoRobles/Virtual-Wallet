@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const pool = require('../database');
+const { pool }= require('../database');
 const { encryptPassword, matchPassword } = require('./helpers');
 
 //PASSPORT
@@ -29,8 +29,6 @@ passport.use(
             await pool.query(
                 'SELECT * FROM users WHERE username = ?',[username],
                 async function (err, rows) {
-                    console.log(rows);
-                    console.log('above row object');
                     if (err) return done(err);
                     if (rows.length) {
                         return done(
@@ -55,8 +53,6 @@ passport.use(
                             [newUser]
                         );
                         newUser.id = result.insertId;
-                        console.log(newUser);
-                        console.log(result);
                         return done(null, newUser);
                     }
                 }
@@ -76,12 +72,10 @@ passport.use(
         passReqToCallback: true
       },
       async function(req, username, password, done) {
-        console.log(req.body);
         const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username])
             if (rows.length > 0) {
                 const user = rows[0]
                 const validatedPassword = await matchPassword(password, user.password);
-                console.log(validatedPassword);
                 if (validatedPassword) {
                     return done(null, rows[0], req.flash('success',`Welcome ${user.firstname}`));
                 }

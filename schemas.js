@@ -27,8 +27,10 @@ module.exports.operationSchema = Joi.object({
     operation: Joi.object({
         title: Joi.string().required().escapeHTML(),
         value: Joi.number().required().min(0),
-        description: Joi.string().escapeHTML(),
-    }).required(),
+        type: Joi.string().required().escapeHTML(),
+        category: Joi.string().required().escapeHTML(),
+        body: Joi.string().escapeHTML(),
+    })
 });
 
 module.exports.signUpSchema = Joi.object({

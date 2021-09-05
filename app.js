@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
-};
+}
 
 const express = require('express');
 const path = require('path');
@@ -10,10 +10,10 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
+const { database } = require('./database');
 
 const passport = require('passport');
-const helmet = require('helmet')
-
+const helmet = require('helmet');
 
 const myWalletRoutes = require('./routes/myWallet');
 const userRoutes = require('./routes/users');
@@ -24,6 +24,7 @@ const passportConfig = require('./utils/passport');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
+
 
 //session
 //sesion secret
@@ -58,7 +59,6 @@ app.use(passport.session());
 
 //FLASH
 app.use(flash());
-
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
@@ -74,6 +74,7 @@ app.use(function (req, res, next) {
 
     next();
 });
+
 //METHOD OVERRIDE
 app.use(methodOverride('_method'));
 
@@ -94,29 +95,30 @@ app.use('/mywallet', myWalletRoutes);
 app.use('/', userRoutes);
 //HOME ROUTE
 app.get('/', (req, res) => {
+    
     res.render('home');
 });
 
-helmet
+//helmet;
 
 app.use(helmet());
 const scriptSrcUrls = [
-    "https://stackpath.bootstrapcdn.com/",
-    "https://kit.fontawesome.com/",
-    "https://cdnjs.cloudflare.com/",
-    "https://cdn.jsdelivr.net",
+    'https://stackpath.bootstrapcdn.com/',
+    'https://kit.fontawesome.com/',
+    'https://cdnjs.cloudflare.com/',
+    'https://cdn.jsdelivr.net',
 ];
 const styleSrcUrls = [
-    "https://kit-free.fontawesome.com/",
-    "https://stackpath.bootstrapcdn.com/",
-    "https://fonts.googleapis.com/",
-    "https://use.fontawesome.com/",
-	"https://cdn.jsdelivr.net",
+    'https://kit-free.fontawesome.com/',
+    'https://stackpath.bootstrapcdn.com/',
+    'https://fonts.googleapis.com/',
+    'https://use.fontawesome.com/',
+    'https://cdn.jsdelivr.net',
 ];
 const connectSrcUrls = [
-    "https://a.tiles.mapbox.com/",
-    "https://b.tiles.mapbox.com/",
-    "https://events.mapbox.com/",
+    'https://a.tiles.mapbox.com/',
+    'https://b.tiles.mapbox.com/',
+    'https://events.mapbox.com/',
 ];
 const fontSrcUrls = [];
 
@@ -127,18 +129,13 @@ app.use(
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-            workerSrc: ["'self'", "blob:"],
+            workerSrc: ["'self'", 'blob:'],
             objectSrc: [],
-            imgSrc: [
-                "'self'",
-                "blob:",
-                "data:",
-            ],
+            imgSrc: ["'self'", 'blob:', 'data:'],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
     })
 );
-
 
 // error route handlers
 app.all('*', (req, res, next) => {

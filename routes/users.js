@@ -28,7 +28,6 @@ router.post(
 // LOGOUT
 router.get('/logout', (req, res) => {
     req.logout();
-    req.flash('success', 'Goodbye!');
     res.redirect('/');
 });
 

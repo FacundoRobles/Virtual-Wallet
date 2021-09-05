@@ -1,9 +1,9 @@
 
 <% layout('layouts/boilerplate') %>
-<div style="height: 100vh;"class="container-fluid mt-5">
+<div style="height: 100vh;"class="container mt-5">
     <% if (error && error.length) { %>
     <div class="row">
-        <div class="col-4 offset-4 mt-5">
+        <div class="col-12 col-md-8 col-xl-6 offset-0 offset-md-2 offset-xl-3 mt-3 mb-5 mb-md-0">
             <div class="alert alert-danger" role="alert">
                 <h2 class="alert-heading text-center pb-4"><%= error %> </h2>
                 <div class="d-grid"><a href="/"class="text-decoration-none text-white btn btn-success ">Go back</a></div> 
@@ -12,9 +12,9 @@
     </div>
     <% } else {%> 
     <div class="row">
-        <div class="col-4 offset-4 mt-5">
+        <div class="col-12 col-md-9 col-lg-6 offset-0 offset-md-2 offset-lg-3 mt-3 mb-5 mb-md-0 ">
             <div class="alert alert-danger" role="alert">
-                <h2 class="alert-heading text-center pb-4"><%= err.message %> </h2>
+                <h2 class="alert-heading text-md-center pb-4 text"><%= err.message %> </h2>
                 <div class="d-grid"><a href="/"class="text-decoration-none text-white btn btn-success ">Go back</a></div> 
             </div>
         </div>

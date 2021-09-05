@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
     <section class="container p-4">
         <article class="row">
-            <div class="col-12 col-md-9 col-lg-6 offset-0 offset-md-2 offset-lg-3 mt-3 mb-5 mb-md-0">
+            <div class="col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3 mt-3 mb-5 mb-md-0">
                 <div class="card bg-dark text-light">
                     <div class="card-header text-center">
                         <h2>Edit Operation</h2>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-floating my-4">
                                 <textarea class="form-control" placeholder="Enter description" id="description"
-                                    style="height: 100px" name="operation[body]"><%= operation.body %></textarea>
+                                    style="height: 100px" name="operation[body]"><%= operation.body !== 'Description'? operation.body : '' %></textarea>
                                 <label for="description" class="text-dark">Description</label>
                             </div>
                             <div class="justify-content-between d-flex">

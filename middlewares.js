@@ -1,14 +1,20 @@
+const ExpressError = require('./utils/ExpressError');
+
 const { operationSchema, signUpSchema, loginSchema } = require('./schemas');
 
-module.exports.validateOperation = (req, res, next) => {
-	const { error } = operationSchema.validate(req.body);
-	if (error) {
+module.exports.validateOperation = async (req, res, next) => {
+	try {
+		if(!req.body.operation.body)
+        	req.body.operation.body = 'Description';
+		const value = await operationSchema.validateAsync(req.body);
+	}
+	catch (error) { 
 		const msg = error.details.map((el) => el.message).join(',');
 		throw new ExpressError(msg, 400);
-	} else {
-		next();
 	}
+	next();
 };
+
 module.exports.validateSignUp = (req, res, next) => {
 	const { error } = signUpSchema.validate(req.body);
 	if (error) {

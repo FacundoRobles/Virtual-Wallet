@@ -16,6 +16,8 @@ registerBtn.addEventListener('click', function(e){
     overlay.classList.remove('hidden')
 })
 
+overlay.addEventListener('click', hideAll);
+
 function hideAll (){
     loginForm.classList.add('hidden')
     registerForm.classList.add('hidden')
